@@ -1,11 +1,11 @@
 package com.asarabia.bills.model;
 
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 @Data
+@Builder(toBuilder = true)
 public class Reference {
-    @Id
     private String value;
     private String name;
 }

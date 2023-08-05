@@ -15,19 +15,24 @@ import reactor.core.publisher.Mono;
 public class BillsController {
     private final BillsGateway billsGateway;
 
+    @GetMapping()
+    public Flux<Bill> getBills( ){
+        return billsGateway.getBills();
+    }
+
     @GetMapping("{identification}")
-    public Flux<Bill> getBills(@PathVariable("identification") String identification ){
-        return billsGateway.getBills(identification);
+    public Flux<Bill> getBillsByCostumer(@PathVariable("identification") String identification ){
+        return billsGateway.getBillsByCostumer(identification);
     }
 
     @GetMapping("{identification}/{referenceValue}")
-    public Mono<Bill> getBillByReferencePay(@PathVariable("identification") String identification, @PathVariable("referenceValue") String referenceValue ){
-        return billsGateway.getBillByReferencePay(identification, referenceValue);
+    public Mono<Bill> getBillByCostumerAndReferencePay(@PathVariable("identification") String identification, @PathVariable("referenceValue") String referenceValue ){
+        return billsGateway.getBillByCostumerAndReferencePay(identification, referenceValue);
     }
 
-    @GetMapping("{identification}/{id}")
-    public Mono<Bill> getBillById(@PathVariable("identification") String identification, @PathVariable("referenceValue") Integer id ){
-        return billsGateway.getBillById(identification, id);
+    @GetMapping("{id}")
+    public Mono<Bill> getBillById(@PathVariable("referenceValue") Integer id ){
+        return billsGateway.getBillById(id);
     }
 
     @PostMapping

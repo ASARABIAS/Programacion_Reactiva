@@ -1,12 +1,12 @@
 package com.asarabia.bills.model;
 
 import com.asarabia.bills.model.emuns.ValidationDataBase;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 @Data
+@Builder(toBuilder = true)
 public class Bill {
-    @Id
     private Integer id;
     private String name;
     private String agreement;
