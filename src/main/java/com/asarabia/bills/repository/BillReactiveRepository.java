@@ -7,5 +7,5 @@ import reactor.core.publisher.Mono;
 
 public interface BillReactiveRepository extends ReactiveCrudRepository<BillDTO, Integer> {
     Flux<BillDTO> findAllByIdentification(String identification);
-    Mono<BillDTO> findAllByIdentificationAndRefvalue(String identification, String refvalue);
+    Mono<BillDTO> findAllByIdentificationAndRefValue(String identification, String refvalue);
 }

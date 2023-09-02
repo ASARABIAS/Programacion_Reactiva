@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 public class BillsController {
     private final BillsGateway billsGateway;
 
-    @GetMapping()
+    @GetMapping
     public Flux<Bill> getBills( ){
         return billsGateway.getBills();
     }
@@ -30,7 +30,7 @@ public class BillsController {
         return billsGateway.getBillByCostumerAndReferencePay(identification, referenceValue);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("search/{referenceValue}")
     public Mono<Bill> getBillById(@PathVariable("referenceValue") Integer id ){
         return billsGateway.getBillById(id);
     }

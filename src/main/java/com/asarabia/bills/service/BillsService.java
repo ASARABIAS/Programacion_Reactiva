@@ -25,7 +25,7 @@ public class BillsService implements BillsGateway {
     }
 
     public Mono<Bill> getBillByCostumerAndReferencePay(String identification, String referenceValue) {
-        return billReactiveRepository.findAllByIdentificationAndRefvalue(identification, referenceValue).map(BillsService::getBillFromBIllDTO);
+        return billReactiveRepository.findAllByIdentificationAndRefValue(identification, referenceValue).map(BillsService::getBillFromBIllDTO);
     }
 
     public Mono<Bill> getBillById(Integer id) {
@@ -52,8 +52,8 @@ public class BillsService implements BillsGateway {
                 .validationDataBase(bill.getValidationDataBase().getKey())
                 .enabledToPay(bill.getStatus().getEnabledToPay())
                 .status(bill.getStatus().getValue().getKey())
-                .refvalue(bill.getReference().getValue())
-                .refname(bill.getReference().getName())
+                .refValue(bill.getReference().getValue())
+                .refName(bill.getReference().getName())
                 .acctId(bill.getBankAccount().getAcctId())
                 .acctTypeCode(bill.getBankAccount().getAcctTypeCode())
                 .acctTypeCodeDesc(bill.getBankAccount().getAcctTypeCodeDesc())
@@ -76,8 +76,8 @@ public class BillsService implements BillsGateway {
                         .value(getStatusValueFromBIllDTO(billDTO.getStatus()))
                         .build())
                 .reference(Reference.builder()
-                        .name(billDTO.getRefname())
-                        .value(billDTO.getRefvalue())
+                        .name(billDTO.getRefName())
+                        .value(billDTO.getRefValue())
                         .build())
                 .bankAccount(BankAccount.builder()
                         .acctId(billDTO.getAcctId())
