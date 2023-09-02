@@ -30,8 +30,8 @@ public class BillsController {
         return billsGateway.getBillByCostumerAndReferencePay(identification, referenceValue);
     }
 
-    @GetMapping("search/{referenceValue}")
-    public Mono<Bill> getBillById(@PathVariable("referenceValue") Integer id ){
+    @GetMapping("search/{id}")
+    public Mono<Bill> getBillById(@PathVariable("id") Integer id ){
         return billsGateway.getBillById(id);
     }
 
