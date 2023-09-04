@@ -18,4 +18,33 @@ public class Bill {
     private Reference reference;
     private BankAccount bankAccount;
     private Customer customer;
+
+    @Override
+    public String toString(){
+        return "{\n" +
+                "    \"name\": \""+this.name+"\",\n" +
+                "    \"agreement\":\""+this.agreement+"\",\n" +
+                "    \"endDate\": \""+this.endDate+"\",\n" +
+                "    \"amount\": \""+this.amount+"\",\n" +
+                "    \"description\": \""+this.description+"\",\n" +
+                "    \"validationDataBase\": \""+this.validationDataBase+"\",\n" +
+                "    \"status\": {\n" +
+                "        \"enabledToPay\": \""+this.status.getEnabledToPay()+"\",\n" +
+                "        \"value\":\""+this.status.getValue()+"\"\n" +
+                "    },\n" +
+                "    \"reference\":{\n" +
+                "        \"value\": \""+this.reference.getValue()+"\",\n" +
+                "        \"name\": \""+this.reference.getName()+"\"\n" +
+                "    },\n" +
+                "    \"bankAccount\": {\n" +
+                "        \"acctId\": \""+this.bankAccount.getAcctId()+"\",\n" +
+                "        \"acctTypeCode\":\""+this.bankAccount.getAcctTypeCode()+"\",\n" +
+                "        \"acctTypeCodeDesc\": \""+this.bankAccount.getAcctTypeCodeDesc()+"\"\n" +
+                "    },\n" +
+                "    \"customer\": {\n" +
+                "        \"identification\": \""+this.customer.getIdentification()+"\",\n" +
+                "        \"name\": \""+this.customer.getName()+"\"\n" +
+                "    }\n" +
+                "}";
+    }
 }

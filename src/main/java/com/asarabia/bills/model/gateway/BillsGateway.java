@@ -12,4 +12,5 @@ public interface BillsGateway {
     Mono<Bill> getBillById(Integer id );
     Mono<Bill> inscribirBill(Bill bill);
     Mono<Void> deleteBill(Integer id);
+    Mono<String> getLastBillKafka(String topico);
 }

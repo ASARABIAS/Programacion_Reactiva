@@ -7,6 +7,8 @@ import com.asarabia.bills.model.emuns.ValidationDataBase;
 import com.asarabia.bills.model.gateway.BillsGateway;
 import com.asarabia.bills.repository.BillReactiveRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -14,6 +16,9 @@ import reactor.core.publisher.Mono;
 @Service
 @RequiredArgsConstructor
 public class BillsService implements BillsGateway {
+
+    private final KafkaProducerService kafkaProducerService;
+    private final KafkaConsumerService kafkaConsumerService;
     private final BillReactiveRepository billReactiveRepository;
 
     public Flux<Bill> getBills() {
@@ -34,11 +39,16 @@ public class BillsService implements BillsGateway {
 
 
     public Mono<Bill> inscribirBill(Bill bill) {
+        kafkaProducerService.send("Bill-2023-09-02",bill.getReference().getValue(),bill);
         return billReactiveRepository.save(getBillDTOFromBill(bill)).map(BillsService::getBillFromBIllDTO);
     }
 
     public Mono<Void> deleteBill(Integer id) {
         return billReactiveRepository.deleteById(id);
+    }
+
+    public Mono<String> getLastBillKafka(String topico) {
+        return Mono.just(kafkaConsumerService.ObtenerUltimoBill(topico));
     }
 
     private static BillDTO getBillDTOFromBill(Bill bill){

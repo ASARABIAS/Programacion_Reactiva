@@ -44,4 +44,11 @@ public class BillsController {
     public Mono<Void> deleteBill(@PathVariable("id") Integer id){
         return billsGateway.deleteBill(id);
     }
+
+    //
+
+    @GetMapping("getLastBillKafka/{topico}")
+    public Mono<String> getLastBillKafka (@PathVariable("topico") String topico ){
+        return billsGateway.getLastBillKafka(topico);
+    }
 }
