@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 
 @RestController
-@RequestMapping(value = "/api/bills", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/user/bills", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class BillsController {
     private final BillsGateway billsGateway;
@@ -25,26 +25,23 @@ public class BillsController {
         return billsGateway.getBillsByCostumer(identification);
     }
 
-    @GetMapping("{identification}/{referenceValue}")
-    public Mono<Bill> getBillByCostumerAndReferencePay(@PathVariable("identification") String identification, @PathVariable("referenceValue") String referenceValue ){
-        return billsGateway.getBillByCostumerAndReferencePay(identification, referenceValue);
-    }
-
     @GetMapping("search/{id}")
     public Mono<Bill> getBillById(@PathVariable("id") Integer id ){
         return billsGateway.getBillById(id);
     }
 
+    /*
     @PostMapping
     public Mono<Bill> inscribirBill(@RequestBody Bill bill){
         return billsGateway.inscribirBill(bill);
     }
-
+    */
+    /*
     @DeleteMapping("{id}")
     public Mono<Void> deleteBill(@PathVariable("id") Integer id){
         return billsGateway.deleteBill(id);
     }
-
+    */
     //
 
     @GetMapping("getLastBillKafka/{topico}")

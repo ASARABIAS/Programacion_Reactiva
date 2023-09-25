@@ -47,6 +47,10 @@ public class BillsService implements BillsGateway {
         return billReactiveRepository.deleteById(id);
     }
 
+    public Flux<Bill> getBillByCostumerAndReferencePay() {
+        return billReactiveRepository.findAllByEnabledToPay(true).map(BillsService::getBillFromBIllDTO);
+    }
+
     public Mono<String> getLastBillKafka(String topico) {
         return Mono.just(kafkaConsumerService.ObtenerUltimoBill(topico));
     }
